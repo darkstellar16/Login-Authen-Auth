@@ -16,7 +16,7 @@ const registerData = async (req, res) => {
         const oldUser = await loginInfo.findOne({ email });
         console.log(oldUser);
         if (oldUser) {
-            return res.status(409).send("Please login you are already registered one");  //checking whether the user is already present or not..
+            return res.status(409).send("Please login you are already registered user");  //checking whether the user is already present or not..
         }
 
         const encryptedPasword = await bcrypt.hash(password, 10);
@@ -26,7 +26,7 @@ const registerData = async (req, res) => {
             email: email,
             password: encryptedPasword
         })
-        res.status(200).send("User registered successfully");
+        res.status(200).send("User have registered successfully");
     }
     catch (error) {
         console.log(error);
