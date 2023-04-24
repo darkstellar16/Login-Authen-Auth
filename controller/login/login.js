@@ -13,16 +13,18 @@ const loginData = async (req, res) => {
         }
         const user = await loginInfo.findOne({ email });
         if (user && (await bcrypt.compare(password, user.password))) {
-            const token = jwt.sign({ email, password }, "fuck off to this life", { expiresIn: "2h" })
 
+            const token = jwt.sign({ email, password }, "fuckoff ", { expiresIn: "2h" })
+            console.log(token);
             user.token = token;
-            res.status(200).json(user);
+            return res.status(200).json({user});
         }
-        res.status(400).send("invalid credentials")
+        else{
+            res.status(400).send("invalid credentials")
+        }
 
     } catch (error) {
         console.log(error);
-
     }
 }
 module.exports = loginData;
